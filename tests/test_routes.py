@@ -1,6 +1,6 @@
 from flask import Flask
-
 from app.routes import configure_routes
+from app.api_model import StopsCollection
 
 
 def test_base_route():
@@ -12,3 +12,8 @@ def test_base_route():
     response = client.get(url)
     assert response.get_data() == b"plain text"
     assert response.status_code == 200
+
+
+def test_model():
+    stops = StopsCollection()
+    pass
