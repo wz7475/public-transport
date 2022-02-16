@@ -41,6 +41,10 @@ class StopsCollection:
         pass
 
 
+def get_stops_data():
+    pass
+
+
 if __name__ == "__main__":
     stops = StopsCollection()
     stops.parse_stops_data()
