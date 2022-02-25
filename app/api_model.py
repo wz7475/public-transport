@@ -9,6 +9,13 @@ class BusStop:
         self._lines = stop_lines
         self._name = stop_name
 
+    def _fetch_request(self, url):
+        return requests.get(url).json()
+
+    def _make_request(self, stop_id, stop_nr, line):
+        url = f"https://api.um.warszawa.pl/api/action/dbtimetable_get/?id=e923fa0e-d96c-43f9-ae6e-60518c9f3238&busstopId={stop_id}&busstopNr={stop_nr}&line={line}&apikey={self._api_key}"
+        return self._fetch_request(url)
+
     def __str__(self):
         return self._name
 
@@ -30,13 +37,6 @@ class StopsCollection:
             self._stops = [stop]
         else:
             self._stops.append(stop)
-
-    def _fetch_request(self, url):
-        return requests.get(url).json()
-
-    def _make_request(self, stop_id, stop_nr, line):
-        url = f"https://api.um.warszawa.pl/api/action/dbtimetable_get/?id=e923fa0e-d96c-43f9-ae6e-60518c9f3238&busstopId={stop_id}&busstopNr={stop_nr}&line={line}&apikey={self._api_key}"
-        return self._fetch_request(url)
 
     def _get_stops_data(self):
         with open("app/config.json") as f:
