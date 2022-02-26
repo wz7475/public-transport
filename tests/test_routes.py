@@ -1,6 +1,6 @@
-from flask import Flask
 from app.api_model import StopsCollection
 from app.app import app
+import psycopg2
 
 
 def test_base_route():
@@ -13,4 +13,20 @@ def test_base_route():
 
 def test_model():
     stops = StopsCollection()
+    pass
+
+
+def test_db():
+    con = psycopg2.connect(
+        host="localhost",
+        database="sample_db",
+        user="postgres",
+        password="123",
+    )
+
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM example")
+    pass
+    rows = cur.fetchall()
     pass
