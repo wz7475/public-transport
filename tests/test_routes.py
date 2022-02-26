@@ -30,3 +30,18 @@ def test_db():
     pass
     rows = cur.fetchall()
     pass
+
+def test_db_heroku():
+    con = psycopg2.connect(
+        host="ec2-52-208-185-143.eu-west-1.compute.amazonaws.com",
+        database="dcdj3481fvgeod",
+        user="xdnuuualruonmz",
+        password="863cbcf255118bfcce20d2f1ff965afe13f198de97e3acc916f909c6f2ccf693",
+    )
+
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM example")
+    pass
+    rows = cur.fetchall()
+    pass
