@@ -1,6 +1,4 @@
 from flask import render_template
-from .api_model import get_stops_data
-
 
 def index():
     return render_template("index.html")
