@@ -34,3 +34,8 @@ td {
 #content {
     width: 70%;
 }
+
+#positions {
+    width: 80%;
+    margin: 50px auto;
+}

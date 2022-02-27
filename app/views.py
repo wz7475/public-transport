@@ -1,5 +1,8 @@
-from flask import render_template
 import psycopg2
+from flask import render_template
+
+from app.api_model import FilteredStopsCollection
+from app.config_db import cur
 
 
 def index():
@@ -36,3 +39,19 @@ def data():
     rows = cur.fetchall()
 
     return str(rows)
+
+
+def timetable():
+    cur.execute("SELECT * FROM bus_stops")
+    stops_list = cur.fetchall()
+
+    cur.execute("SELECT * FROM api_key")
+    api_key = cur.fetchall()[0][0]
+    stops = FilteredStopsCollection(api_key, stops_list)
+    mytimetable = stops.get_timetable()
+    output = ""
+    elements = []
+    for row in mytimetable:
+        output += f"{str(row[0])} {row[1]} {row[2]}"
+        elements.append(f"{str(row[0])} {row[1]} {row[2]}")
+    return render_template("timetable.html", elements=elements)

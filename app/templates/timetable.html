@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Timetable</title>
+{% endblock %}
+
+{% block body %}
+    <div id="positions">
+        {% for item in elements %}
+            <div>{{ item }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+
+
+
+{#{% endblock %}#}
