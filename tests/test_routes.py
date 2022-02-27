@@ -43,7 +43,10 @@ def test_db_heroku():
 
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM example")
-    pass
-    rows = cur.fetchall()
+    cur.execute("SELECT * FROM bus_stops")
+    stops_list = cur.fetchall()
+
+    cur.execute("SELECT * FROM api_key")
+    api_key = cur.fetchall()[0][0]
+    stops = StopsCollection(api_key, stops_list)
     pass

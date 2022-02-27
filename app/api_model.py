@@ -1,5 +1,4 @@
 import requests
-import json
 
 
 class BusStop:
@@ -21,16 +20,10 @@ class BusStop:
 
 
 class StopsCollection:
-    def __init__(self):
+    def __init__(self, api_key, stops_list):
         self._stops = None
-        self._api_key = None
-        self._set_up_api_key()
-        self._process_stops()
-
-    def _set_up_api_key(self):
-        with open("app/secrets.json") as f:
-            apikey_dict = json.load(f)
-        self._api_key = apikey_dict["api_key"]
+        self._api_key = api_key
+        self._process_stops(stops_list)
 
     def _add_stop(self, stop: BusStop):
         if self._stops is None:
@@ -38,24 +31,14 @@ class StopsCollection:
         else:
             self._stops.append(stop)
 
-    def _get_stops_data(self):
-        with open("app/config.json") as f:
-            stops_dict = json.load(f)
-        return stops_dict
-
-    def _process_stops(self):
-        stops = self._get_stops_data()
-        for stop in stops:
-            pass
-            stop_id = stop
-            stop_name = stops[stop]["name"]
-            stop_nr = stops[stop]["stop_nr"]
-            stop_lines = stops[stop]["lines"]
+    def _process_stops(self, stops_list):
+        for stop in stops_list:
+            stop_id = stop[0]
+            stop_name = stop[1]
+            stop_lines = stop[2]
+            stop_nr = stop[3]
             stop_instance = BusStop(stop_id, stop_nr, stop_lines, stop_name)
             self._add_stop(stop_instance)
 
-
-def get_stops_data():
-    pass
 
 
