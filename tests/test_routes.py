@@ -1,6 +1,7 @@
+import psycopg2
+
 from app.api_model import StopsCollection
 from app.app import app
-import psycopg2
 
 
 def test_base_route():
@@ -30,6 +31,7 @@ def test_db():
     pass
     rows = cur.fetchall()
     pass
+
 
 def test_db_heroku():
     con = psycopg2.connect(
