@@ -141,7 +141,7 @@ class FilteredStopsCollection(StopsCollection):
                 past_timetable.append(position)
             else:
                 future_timetable.append(position)
-        past_timetable.sort(key=lambda pos: pos[0], reverse=True)
+        past_timetable.sort(key=lambda pos: pos[0])
         future_timetable.sort(key=lambda pos: pos[0])
         return past_timetable, future_timetable
 
@@ -166,16 +166,6 @@ class FilteredStopsCollection(StopsCollection):
         else:
             final_timetable += future_timetable[:future_positions_amount]
         return final_timetable
-
-    # def _timetable_time_obj(self, stops_ids, amount=20):
-    #     timetable_with_stings = self._timetable_filter_stops(stops_ids, amount)
-    #     timetable_date_obj = []
-    #     for position in timetable_with_stings:
-    #         delta = self._str_date_to_timedelta(position[0])
-    #         new_position = delta, position[1], position[2]
-    #         timetable_date_obj.append(new_position)
-    #     return timetable_date_obj
-    #
 
     @staticmethod
     def _get_current_time():
