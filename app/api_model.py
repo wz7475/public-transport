@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 import pytz as pytz
 import requests
+from fake_useragent import UserAgent
 
 
 def str_date_to_timedelta(time_str):
@@ -31,7 +32,12 @@ class BusStop:
         return self._timetable
 
     def _fetch_request(self, url):
-        return requests.get(url).json()
+        ua = UserAgent()
+        header = {
+            "User-Agent": str(ua.chrome),
+            "Content-Type": "application/json; charset=utf-8",
+        }
+        return requests.get(url, headers=header).json()
 
     def _make_request(self, line):
         url = (

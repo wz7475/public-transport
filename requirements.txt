@@ -8,3 +8,4 @@ Werkzeug==1.0.0
 psycopg2==2.9.3
 requests==2.26.0
 pytz==2021.3
+fake_useragent==0.1.11
