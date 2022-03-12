@@ -63,3 +63,4 @@ def test_timetable_get():
     api_key = cur.fetchall()[0][0]
     stops = FilteredStopsCollection(api_key, stops_list)
     timetable = stops.get_timetable()
+    pass

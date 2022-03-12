@@ -40,11 +40,12 @@ class BusStop:
         return requests.get(url, headers=header).json()
 
     def _make_request(self, line):
-        url = (
-            f"https://api.um.warszawa.pl/api/action/dbtimetable_get"
-            f"?id=e923fa0e-d96c-43f9-ae6e-60518c9f3238&busstopId={self._stop_id}"
-            f"&busstopNr={self._stop_nr}&line={line}&apikey={self._api_key}"
-        )
+        # url = (
+        #     f"https://api.um.warszawa.pl/api/action/dbtimetable_get"
+        #     f"?id=e923fa0e-d96c-43f9-ae6e-60518c9f3238&busstopId={self._stop_id}"
+        #     f"&busstopNr={self._stop_nr}&line={line}&apikey={self._api_key}"
+        # )
+        url = f"https://mock-api-wtp.herokuapp.com/json/{line}"
         return self._fetch_request(url)
 
     def _fetch_timetable_per_line(self, line):
@@ -165,7 +166,7 @@ class FilteredStopsCollection(StopsCollection):
         if len(past_timetable) < 5:
             final_timetable = past_timetable
         else:
-            final_timetable = past_timetable[:5]
+            final_timetable = past_timetable[-5:]
         future_positions_amount = amount - len(final_timetable)
         if len(future_timetable) < future_positions_amount:
             final_timetable += future_timetable
