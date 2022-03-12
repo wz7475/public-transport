@@ -7,3 +7,11 @@ def test_base_route():
     response = client.get(url)
     assert response.get_data() == b"plain text"
     assert response.status_code == 200
+
+
+def test_timetable():
+    client = app.test_client()
+    url = "/timetable"
+    response = client.get(url)
+    # assert response.get_data() == b"plain text"
+    assert response.status_code == 200

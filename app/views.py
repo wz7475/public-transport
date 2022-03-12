@@ -1,3 +1,5 @@
+import json
+
 import psycopg2
 from flask import render_template
 
@@ -55,3 +57,17 @@ def timetable():
         output += f"{str(row[0])} {row[1]} {row[2]}"
         elements.append(f"{str(row[0])} {row[1]} {row[2]}")
     return render_template("timetable.html", elements=elements)
+
+
+def timetable_json():
+    cur.execute("SELECT * FROM bus_stops")
+    stops_list = cur.fetchall()
+
+    cur.execute("SELECT * FROM api_key")
+    api_key = cur.fetchall()[0][0]
+    stops = FilteredStopsCollection(api_key, stops_list)
+    mytimetable = stops.get_timetable()
+    list_for_json = []
+    for row in mytimetable:
+        list_for_json.append([str(row[0]), row[1], row[2]])
+    return json.dumps(list_for_json)
