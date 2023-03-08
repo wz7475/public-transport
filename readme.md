@@ -23,8 +23,4 @@ App will have options to:
 * choose go out time
 * filters for certain stops
 
-## connected servise
 
-https://github.com/wz7475/public-transport
-
-https://github.com/wz7475/first
